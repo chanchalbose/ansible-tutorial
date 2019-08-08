@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  remote_user: vagrant
+  tasks:
+  - name: check user rahul is present
+    command: id rahul
+    ignore_errors: yes
+    register: result
+  - debug:
+      var: result
+  - name: install tree package where rahul user is not present
+    yum:
+      name: tree
+      state: latest
+    when: result.failed
