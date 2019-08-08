@@ -1,0 +1,7 @@
+---
+- hosts: node2
+  become: true
+  remote_user: vagrant
+  tasks:
+  - name: configure apache server
+    include: apache.yml
