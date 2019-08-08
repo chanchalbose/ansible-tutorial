@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  remote_user: vagrant
+  vars:
+    users: alice
+  vars_files:
+    - packagelist.yml
+  tasks:
+  - name: Create users in node2
+    user:
+      name: "{{ users }}"
+      state: present
+    when: ansible_hostname == 'node2'
+  - name: Install {{ package }} in node1
+    yum:
+      name: "{{ package }}"
+      state: latest
+    when: ansible_hostname == 'node1'
+  - name: include vars file
+    include_vars:
+      file: service.yml
+  - name: start service in node1
+    service:
+      name: "{{ svc }}"
+      state: started
+    when: ansible_hostname == 'node1'
