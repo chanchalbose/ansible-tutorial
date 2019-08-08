@@ -1,0 +1,10 @@
+---
+- hosts: node2
+  remote_user: vagrant
+  become: true
+  vars:
+    user: alice
+  tasks:
+  - name: Create {{ user }}
+    user:
+      name: "{{ user }}"
