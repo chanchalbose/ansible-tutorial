@@ -1,0 +1,12 @@
+node1
+node2
+
+[windows]
+win10
+
+[windows:vars]
+ansible_user=Chanchal
+ansible_password="Password"
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
