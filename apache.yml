@@ -1,0 +1,13 @@
+---
+- name: Install apache
+  yum:
+    name: httpd
+    state: latest
+- name: Create index.html page
+  copy:
+    dest: /var/www/html/index.html
+    content: "Created by Ansible"
+- name: Start httpd service
+  service:
+    name: httpd
+    state: restarted
