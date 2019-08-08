@@ -1,0 +1,33 @@
+---
+- name: Configure ftp server
+  hosts: node1
+  remote_user: vagrant
+  become: true
+  tasks:
+  - name: Installs vsftpd server
+    yum:
+      name: vsftpd
+      state: latest
+  - name: starts vsftpd service
+    service:
+      name: vsftpd
+      state: started
+      enabled: true
+- name: Congigure httpd service
+  hosts: node2
+  remote_user: vagrant
+  become: true
+  tasks:
+  - name: Installs httpd server
+    yum:
+      name: httpd
+      state: latest
+  - name: starts vsftpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
+  - name: Create index.html
+    copy:
+      dest: /var/www/html/index.html
+      content:  "Created by Ansible"
